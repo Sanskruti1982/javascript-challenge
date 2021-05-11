@@ -1,24 +1,22 @@
 // from data.js
 var tableData = data;
 
-
-// YOUR CODE HERE!
-
+// Selecting the table body id
 var tbody = d3.select("tbody");
 
+// Adding rows into table and then add each key and value
 tableData.forEach(function(ufoReport) {
     console.log(ufoReport);
     var row = tbody.append("tr");
    Object.entries(ufoReport).forEach(function([key, value]) {
       console.log(key, value);
       // Append a cell to the row for each value
- //     // in the weather report object
-      var cell = row.append("td");
+       var cell = row.append("td");
       cell.text(value);
     });
   });
 
-
+// Select the button
 var button = d3.select("#filter-btn");
 
 // Select the form
@@ -48,6 +46,7 @@ function runEnter() {
   var inputValue3 = inputElement3.property("value");
   var inputValue4 = inputElement4.property("value");
 
+  // Creating if statement for the filters to work
   var filteredData=tableData;
     if (inputValue){
         filteredData = filteredData.filter(x => x.datetime === inputValue); 
@@ -66,26 +65,17 @@ function runEnter() {
     }
 
   
-
+  // Printing the filtered data
   console.log(filteredData);
 
-  var dt = filteredData.map(x => x.datetime);
-  var city = filteredData.map(x => x.city);
-  var state = filteredData.map(x => x.state);
-  var country = filteredData.map(x => x.datetime);
-  var shape = filteredData.map(x => x.shape);
-  var duration = filteredData.map(x => x.durationMinutes);
-  var comments = filteredData.map(x => x.comments);
-  
-
-  // Then, select the unordered list element by class name
+  // Then, select the table and append the table rows
   var tbody = d3.select("tbody");
   var row = tbody.append("tr");
 
-  // remove any children from the list to
+  // Remove any data from the table
   tbody.html("");
 
-  // append stats to the list
+  // Create a loop to get the value for each key
   filteredData.forEach((x) => {
     console.log(x);
     var row = tbody.append("tr");
